@@ -6,17 +6,13 @@ using System.Data.SqlClient;
 
 namespace Registrar.Objects
 {
-    public class StudentTest: IDisposable
+    public class CourseTest
     {
-        public StudentTest()
+        public CourseTest()
         {
             DBConfiguration.ConnectionString = "Data Source=(localdb)\\mssqllocaldb;Initial Catalog=hair_salon_test;Integrated Security=SSPI;";
         }
 
-        //Delete everything between tests
-        public void Dispose()
-        {
-          Student.DeleteAll();
-        }
+
     }
 }

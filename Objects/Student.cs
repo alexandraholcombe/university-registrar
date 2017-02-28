@@ -22,10 +22,11 @@ namespace Registrar.Objects
     {
       return _id;
     }
-    public int SetId(int newId)
-    {
-      _id = newId;
-    }
+
+    // public int SetId(int newId)
+    // {
+    //   _id = newId;
+    // }
 
     public string GetName()
     {
@@ -47,6 +48,39 @@ namespace Registrar.Objects
       cmd.ExecuteNonQuery();
 
       conn.Close();
+    }
+
+    //Get All students from the Student table
+    public static List<Student> GetAll()
+    {
+      List<Student> allStudents = new List<Student>{};
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("SELECT * FROM students;", conn);
+      SqlDataReader rdr = cmd.ExecuteReader();
+
+      while(rdr.Read())
+      {
+        int id = rdr.GetInt32(0);
+        string name = rdr.GetString(1);
+        DateTime dateOfEnrollment = rdr.GetDateTime(2);
+
+        Student newStudent = new Student(name, dateOfEnrollment, id);
+        allStudents.Add(newStudent);
+      }
+
+      if (rdr != null)
+      {
+        rdr.Close();
+      }
+
+      if(conn != null)
+      {
+        conn.Close();
+      }
+
+      return allStudents;
     }
   }
 }
