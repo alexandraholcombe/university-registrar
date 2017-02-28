@@ -35,7 +35,7 @@ namespace Registrar.Objects
 
     public DateTime GetDateOfEnrollment()
     {
-      return _dateOfEnrollment;
+      return _dateOfEnrollment.Date;
     }
 
     //Check if two objects are equal

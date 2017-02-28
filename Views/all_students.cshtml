@@ -1,0 +1,11 @@
+<h1>All Students</h1>
+
+<ul>
+  @foreach (var student in @Model)
+  {
+    <li><a href="#">@student.GetName()</a></li>
+  }
+</ul>
+
+<a href="/">Home</a>
+<a href="/students/new">Add another student</a>
