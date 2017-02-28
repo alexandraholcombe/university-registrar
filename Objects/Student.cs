@@ -38,6 +38,23 @@ namespace Registrar.Objects
       return _dateOfEnrollment;
     }
 
+    //Check if two objects are equal
+    public override bool Equals(System.Object otherStudent)
+    {
+      if (!(otherStudent is Student))
+      {
+        return false;
+      }
+      else
+      {
+        Student newStudent = (Student) otherStudent;
+        bool idEquality = (this.GetId() == newStudent.GetId());
+        bool nameEquality = (this.GetName() == newStudent.GetName());
+        bool dateEquality = (this.GetDateOfEnrollment() == newStudent.GetDateOfEnrollment());
+
+        return (idEquality && nameEquality && dateEquality);
+      }
+    }
     //Delete all rows from Students table
     public static void DeleteAll()
     {
@@ -49,6 +66,8 @@ namespace Registrar.Objects
 
       conn.Close();
     }
+
+
 
     //Get All students from the Student table
     public static List<Student> GetAll()

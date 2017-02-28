@@ -8,17 +8,17 @@ namespace Registrar.Objects
 {
   public class StudentTest: IDisposable
   {
+    //Set DateTime Objects for use in tests
+    public static DateTime newDate = new DateTime(2011,11,11);
+    public static DateTime twoDate = new DateTime(1995,12,25);
+
+    //Set Student Objects for use in tests
+    public static Student firstStudent = new Student("Christ", twoDate);
+    public static Student secondStudent = new Student("Joseph", newDate);
     public StudentTest()
     {
       DBConfiguration.ConnectionString = "Data Source=(localdb)\\mssqllocaldb;Initial Catalog=registrar_test;Integrated Security=SSPI;";
     }
-    // //Set DateTime Objects for use in tests
-    // DateTime newDate = new DateTime(2011,11,11);
-    // DateTime twoDate = new DateTime(1995,12,25);
-    //
-    // //Set Student Objects for use in tests
-    // Student firstStudent = new Student("Christ", twoDate);
-    // Student secondStudent = new Student("Joseph", newDate);
 
     //Make sure the table is clear at the start of each test
     [Fact]
@@ -30,6 +30,17 @@ namespace Registrar.Objects
 
       //Assert
       Assert.Equal(expectedResult, actualResult);
+    }
+
+
+    [Fact]
+    public void Test_Equal_ReturnsTrueIfNamesAreTheSame()
+    {
+      //Arrange,Act
+      secondStudent = firstStudent;
+
+      //Assert
+      Assert.Equal(secondStudent, firstStudent);
     }
 
     //Delete everything between test
