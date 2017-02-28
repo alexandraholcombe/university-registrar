@@ -72,18 +72,33 @@ namespace Registrar.Objects
       List<Student> actualResult = Student.GetAll();
       List<Student> expectedResult = new List<Student>{firstStudent, secondStudent};
 
-      foreach (Student student in expectedResult)
-      {
-        Console.WriteLine("EXPECTED: " + student.GetName() + ", " + student.GetId());
-      }
-
-      foreach (Student student in actualResult)
-      {
-        Console.WriteLine("ACTUAL: " + student.GetName() + ", " + student.GetId());
-      }
-
+      // foreach (Student student in expectedResult)
+      // {
+      //   Console.WriteLine("EXPECTED: " + student.GetName() + ", " + student.GetId());
+      // }
+      //
+      // foreach (Student student in actualResult)
+      // {
+      //   Console.WriteLine("ACTUAL: " + student.GetName() + ", " + student.GetId());
+      // }
+      //
       Assert.Equal(expectedResult, actualResult);
     }
+
+    [Fact]
+    public void Test_Find_ReturnStudentFromDatabase()
+    {
+      //Arrange
+      Student testStudent = firstStudent;
+      testStudent.Save();
+
+      //Act
+      Student foundStudent = Student.Find(testStudent.GetId());
+
+      //Assert
+      Assert.Equal(testStudent,foundStudent);
+    }
+
     //Delete everything between tests
     public void Dispose()
     {

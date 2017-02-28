@@ -128,5 +128,42 @@ namespace Registrar.Objects
         conn.Close();
       }
     }
+
+    //Finds student in database and returns as object
+    public static Student Find(int id)
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("SELECT * FROM students WHERE id = @StudentId;", conn);
+      cmd.Parameters.Add(new SqlParameter("@StudentId", id.ToString()));
+      SqlDataReader rdr = cmd.ExecuteReader();
+
+      int foundId = 0;
+      string foundName = null;
+      DateTime foundDateTime = new DateTime();
+
+      while (rdr.Read())
+      {
+        foundId = rdr.GetInt32(0);
+        foundName = rdr.GetString(1);
+        foundDateTime = rdr.GetDateTime(2);
+      }
+
+      Student foundStudent = new Student(foundName, foundDateTime, foundId);
+
+      if (rdr != null)
+      {
+        rdr.Close();
+      }
+
+      if (conn != null)
+      {
+        conn.Close();
+      }
+
+      return foundStudent;
+
+    }
   }
 }
