@@ -101,5 +101,32 @@ namespace Registrar.Objects
 
       return allStudents;
     }
+
+    //Save student to database
+    public void Save()
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand ("INSERT INTO students (name, date_of_enrollment) OUTPUT INSERTED.id VALUES(@StudentName, @DateOfEnrollment);", conn);
+      cmd.Parameters.Add(new SqlParameter("@StudentName", this.GetName()));
+      cmd.Parameters.Add(new SqlParameter("@DateOfEnrollment", this.GetDateOfEnrollment()));
+
+      SqlDataReader rdr = cmd.ExecuteReader();
+
+      while(rdr.Read())
+      {
+        this._id = rdr.GetInt32(0);
+      }
+
+      if (rdr != null)
+      {
+        rdr.Close();
+      }
+      if (conn != null)
+      {
+        conn.Close();
+      }
+    }
   }
 }

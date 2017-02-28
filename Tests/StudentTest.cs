@@ -15,6 +15,7 @@ namespace Registrar.Objects
     //Set Student Objects for use in tests
     public static Student firstStudent = new Student("Christ", twoDate);
     public static Student secondStudent = new Student("Joseph", newDate);
+
     public StudentTest()
     {
       DBConfiguration.ConnectionString = "Data Source=(localdb)\\mssqllocaldb;Initial Catalog=registrar_test;Integrated Security=SSPI;";
@@ -32,7 +33,7 @@ namespace Registrar.Objects
       Assert.Equal(expectedResult, actualResult);
     }
 
-
+    //Check if two objects are equal
     [Fact]
     public void Test_Equal_ReturnsTrueIfNamesAreTheSame()
     {
@@ -43,7 +44,31 @@ namespace Registrar.Objects
       Assert.Equal(secondStudent, firstStudent);
     }
 
-    //Delete everything between test
+    //Check that Save method saves to DB
+    [Fact]
+    public void Test_Save_SavesToDatabase()
+    {
+      //Arrange, Act
+      firstStudent.Save();
+
+      //Assert
+      List<Student> actualResult = Student.GetAll();
+      List<Student> expectedResult = new List<Student>{firstStudent};
+
+      foreach (Student student in expectedResult)
+      {
+        Console.WriteLine("EXPECTED: " + student.GetName() + ", " + student.GetId());
+      }
+
+      foreach (Student student in actualResult)
+      {
+        Console.WriteLine("ACTUAL: " + student.GetName() + ", " + student.GetId());
+      }
+
+      Assert.Equal(expectedResult, actualResult);
+    }
+
+    //Delete everything between tests
     public void Dispose()
     {
       Student.DeleteAll();
