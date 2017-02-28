@@ -72,16 +72,6 @@ namespace Registrar.Objects
       List<Student> actualResult = Student.GetAll();
       List<Student> expectedResult = new List<Student>{firstStudent, secondStudent};
 
-      // foreach (Student student in expectedResult)
-      // {
-      //   Console.WriteLine("EXPECTED: " + student.GetName() + ", " + student.GetId());
-      // }
-      //
-      // foreach (Student student in actualResult)
-      // {
-      //   Console.WriteLine("ACTUAL: " + student.GetName() + ", " + student.GetId());
-      // }
-      //
       Assert.Equal(expectedResult, actualResult);
     }
 
