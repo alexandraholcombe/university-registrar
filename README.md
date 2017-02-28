@@ -71,10 +71,10 @@
 * Example Input: "Jennifer"
 * Example Output: "Jennifer", `database-assigned id`
 
-<!-- ### Course class
+### Course class
 ================
 
-**The DeleteAll method for the Course class will will delete all rows from the clients table.**
+**The DeleteAll method for the Course class will will delete all rows from the courses table.**
 * Example Input: none
 * Example Output: nothing
 
@@ -84,74 +84,69 @@
 
 **The Equals method for the Course class will return true if the Course in local memory matches the Course pulled from the database.**
 * Example Input:  
-        > Local: "Elizabeth", stylist_id is 4, id is 10  
-        > Database: "Elizabeth", stylist_id is 4, id is 10  
+        > Local: "Intro to American History", id is 10  
+        > Database: "Intro to American History", id is 10  
 * Example Output: `true`
 
 **The Save method for the Course class will save new Courses to the database.**
 * Example Input:  
-\> New client: "Jennifer", `stylist_id`
+\> New course: "Intro to American History", `HIST101`
 * Example Output: no return value
 
 **The Save method for the Course class will assign an id to each new instance of the Course class.**
 * Example Input:  
-\> New stylist: "Jennifer", `stylist_id`, `local id: 0`  
+\> New stylist: "Intro to American History", `HIST101`, `local id: 0`  
 * Example Output:  
-\> "Jennifer",  `stylist_id`, `database-assigned id`  
+\> "Intro to American History", `HIST101`, `database-assigned id`  
 
-**The GetAll method for the Course class will return all client entries in the database in the form of a list.**
+**The GetAll method for the Course class will return all course entries in the database in the form of a list.**
 * Example Input:  
-        > "Elizabeth", id is 10  
-        > "Katie", id is 11  
-* Example Output: `{Elizabeth object}, {Katie object}`
+        > "Running", number is "PE901"
+        > "Jogging", number is "PE801"
+* Example Output: `{Running object}, {Jogging object}`
 
 **The Find method for the Course class will return the Course as defined in the database.**
-* Example Input: "Jennifer", `stylist_id`,
-* Example Output: "Jennifer", `stylist_id`, `database-assigned id`
-
-**The Update method for the Course class will return the Course with the new name.**
-* Example Input: "Jennifer", `stylist_id`, id is 10
-* Example Output: "Jenny", `stylist_id`, id is 10
-
-**The Delete method for the Course class will return a list of Courses without the deleted Course.**
-* Example Input: "Jennifer", `stylist_id`
-* Example Output: "Kacey, Allison, Claire" -->
+* Example Input: "Running", "PE901"
+* Example Output: "Running", "PE901", `database-assigned id`
 
 
-### Student && Client Classes
+### Student && Course Classes
 =========================  
 
-**The GetClients method for the Stylist class will return a list of all Clients with a stylist_id that matches the Stylist's id property.**
-* Example Input: "Jennifer"
-* Example Output: `{List of Jennifer's Clients}`
+**The AddStudent method for the Course class will add a row to students_courses.**
+* Example Input: Course: "Running" Student: "Jennifer"
+* Example Output: n/a
+
+**The GetStudents method will return a list of students taking the specified course.**
+* Example Input: "Running"
+* Example Output: "Jennifer", "Marc"
+
+**The GetCourses method will return a list of courses that a student is taking.**
+* Example Input: "Marc"
+* Example Output: "Power-Walking", "Sprinting", "Jazz Hands"
 
 ### User Interface
 ===================  
 
-**The registrar can add a new Student using the "Add Student" form.**
+**The registrar can add a new Course using the "Add Course" form.**
+* Example Input: New Course: "Jazz Hands"
+* Example Output: All courses: "Jazz Hands", "Slow-Dancing", "Coloring"
+
+**The registrar can add a new Student using the "Add New Student" form.**
 * Example Input: New Student: "Jennifer", 02/28/2017
 * Example Output: All students: "Allison, Kacey, Jennifer"
 
-<!-- **The user can add a new client using the "Add client" form.**
-* Example Input: New Client: "Rebecca", Stylist: "Elizabeth"
-* Example Output: Elizabeth's clients: "Claire, Rebecca"
+**The registrar can add a student to a course using the "Add to Class" form.**
+* Example Input: "Marc", add to "Chorus"
+* Example Output: All students in Chorus: "Marc", "Christ"
 
-**The user can click on any stylist in the Stylists list to view a new page with a list of the stylist's clients**
-* Example Input: *jennifer clicky*
-* Example Output: "Rebecca, Nicole, Claire"
+**The registrar can see a list of all students in a course by clicking on the course name.**
+* Example Input: "Remedial Physics"
+* Example Output: "Remedial Physics" Students: "Marc"
 
-**The user can edit a client using a link on the client's page which will lead to a change form.**
-* Example Input:  
-    \> *jennifer clicky*  
-    \> New name: "Jenny"  
-* Example Output: "Jenny", Stylist: "Allison"
-
-**The user can delete a client using a link on the client's page which will lead to a change form.**
-* Example Input:  
-    \> *jennifer clicky*  
-    \> *delete clicky*  
-    \> *confirmation clicky*
-* Example Output: Elizabeth's clients: "Rebecca, Claire" -->
+**The registrar can see a list of all courses taken by a student by clicking on the student.**
+* Example Input: "Marc"
+* Example Output: "Jazz Hands for Jesus", "Sprinting", "Power-Walking", "Chorus with Christ"
 
 ***
 
