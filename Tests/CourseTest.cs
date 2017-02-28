@@ -143,6 +143,7 @@ namespace Registrar.Objects
     public void Dispose()
     {
       Course.DeleteAll();
+      Student.DeleteAll();
     }
 
 

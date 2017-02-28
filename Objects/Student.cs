@@ -166,6 +166,37 @@ namespace Registrar.Objects
 
     }
 
-    
+    public List<Course> GetCourses()
+    {
+      SqlConnection conn = DB.Connection();
+      conn.Open();
+
+      SqlCommand cmd = new SqlCommand("SELECT courses.* FROM students JOIN students_courses ON (student.id = students_courses.student_id) JOIN courses ON (students_courses.courses_id = courses.id) WHERE students.id = @StudentId;", conn);
+      cmd.Parameters.Add(new SqlParameter("@StudentId", this.GetId().ToString()));
+
+      SqlDataReader rdr = cmd.ExecuteReader();
+
+      List<Course> courses = new List<Course>{};
+
+      while(rdr.Read())
+      {
+        int courseId = rdr.GetInt32(0);
+        string courseName = rdr.GetString(1);
+        string courseNumber = rdr.GetString(2);
+        Course newCourse = new Course(courseName, courseNumber, courseId);
+        courses.Add(newCourse);
+      }
+
+      if (rdr != null)
+      {
+        rdr.Close();
+      }
+      if (conn != null)
+      {
+        conn.Close();
+      }
+      return courses;
+    }
+
   }
 }
