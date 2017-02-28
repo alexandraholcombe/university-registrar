@@ -85,11 +85,66 @@ namespace Registrar.Objects
       Assert.Equal(testCourse,foundCourse);
     }
 
+    //Add student to Course
+    [Fact]
+    public void Test_AddStudent_AddsStudentToCourse()
+    {
+      //Arrange
+      firstCourse.Save();
+
+      DateTime enrollmentDate = new DateTime(1795, 04,13);
+
+      Student firstStudent = new Student("Rebecca", enrollmentDate);
+      Student secondStudent = new Student("Julia", enrollmentDate);
+
+      firstStudent.Save();
+      secondStudent.Save();
+
+      //Act
+      firstCourse.AddStudent(firstStudent);
+      firstCourse.AddStudent(secondStudent);
+
+      List<Student> actualResult = firstCourse.GetStudents();
+      List<Student> expectedResult = new List<Student>{firstStudent, secondStudent};
+    }
+
+    //return students in course
+    [Fact]
+    public void Test_GetStudents_ReturnStudentsInCourse()
+    {
+      //Arrange
+      Course testCourse = new Course("Running", "PE901");
+      testCourse.Save();
+
+      DateTime enrollmentDate = new DateTime(1795, 04,13);
+
+      Student firstStudent = new Student("Rebecca",enrollmentDate);
+      Student secondStudent = new Student("Julia",enrollmentDate);
+      Student thirdStudent = new Student("Claire",enrollmentDate);
+
+
+      //Act
+      firstStudent.Save();
+      secondStudent.Save();
+      thirdStudent.Save();
+
+      testCourse.AddStudent(firstStudent);
+      testCourse.AddStudent(secondStudent);
+      testCourse.AddStudent(thirdStudent);
+
+      //Assert
+      List<Student> expectedResult = new List<Student>{firstStudent, secondStudent, thirdStudent};
+      List<Student> actualResult = testCourse.GetStudents();
+
+      Assert.Equal(expectedResult, actualResult);
+    }
+
     //Delete everything between tests
     public void Dispose()
     {
       Course.DeleteAll();
     }
+
 
   }
 }
