@@ -61,7 +61,7 @@
 * Example Output:  
 \> "Jennifer", `database-assigned id`  
 
-**The GetAll method for the Student class will return all stylist entries in the database in the form of a list.**
+**The GetAll method for the Student class will return all student entries in the database in the form of a list.**
 * Example Input:  
         > "Elizabeth", id is 10  
         > "Katie", id is 11  

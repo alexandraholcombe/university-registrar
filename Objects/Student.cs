@@ -76,7 +76,7 @@ namespace Registrar.Objects
       SqlConnection conn = DB.Connection();
       conn.Open();
 
-      SqlCommand cmd = new SqlCommand("SELECT * FROM students;", conn);
+      SqlCommand cmd = new SqlCommand("SELECT * FROM students ORDER BY id;", conn);
       SqlDataReader rdr = cmd.ExecuteReader();
 
       while(rdr.Read())

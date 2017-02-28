@@ -38,10 +38,10 @@ namespace Registrar.Objects
     public void Test_Equal_ReturnsTrueIfNamesAreTheSame()
     {
       //Arrange,Act
-      secondStudent = firstStudent;
+      Student thirdStudent = firstStudent;
 
       //Assert
-      Assert.Equal(secondStudent, firstStudent);
+      Assert.Equal(thirdStudent, firstStudent);
     }
 
     //Check that Save method saves to DB
@@ -55,6 +55,23 @@ namespace Registrar.Objects
       List<Student> actualResult = Student.GetAll();
       List<Student> expectedResult = new List<Student>{firstStudent};
 
+
+      Assert.Equal(expectedResult, actualResult);
+    }
+
+    [Fact]
+    public void Test_GetAll_ReturnsListofStudents()
+    {
+      //Arrange
+
+      //Act
+      firstStudent.Save();
+      secondStudent.Save();
+
+      //Assert
+      List<Student> actualResult = Student.GetAll();
+      List<Student> expectedResult = new List<Student>{firstStudent, secondStudent};
+
       foreach (Student student in expectedResult)
       {
         Console.WriteLine("EXPECTED: " + student.GetName() + ", " + student.GetId());
@@ -67,7 +84,6 @@ namespace Registrar.Objects
 
       Assert.Equal(expectedResult, actualResult);
     }
-
     //Delete everything between tests
     public void Dispose()
     {
