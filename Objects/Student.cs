@@ -171,7 +171,7 @@ namespace Registrar.Objects
       SqlConnection conn = DB.Connection();
       conn.Open();
 
-      SqlCommand cmd = new SqlCommand("SELECT courses.* FROM students JOIN students_courses ON (student.id = students_courses.student_id) JOIN courses ON (students_courses.courses_id = courses.id) WHERE students.id = @StudentId;", conn);
+      SqlCommand cmd = new SqlCommand("SELECT courses.* FROM students JOIN students_courses ON (students.id = students_courses.students_id) JOIN courses ON (students_courses.courses_id = courses.id) WHERE students.id = @StudentId;", conn);
       cmd.Parameters.Add(new SqlParameter("@StudentId", this.GetId().ToString()));
 
       SqlDataReader rdr = cmd.ExecuteReader();

@@ -45,6 +45,54 @@ namespace Registrar
         return View["all_students.cshtml", allStudents];
       };
 
+      Get["/courses/{id}/{number}"] = parameters => {
+        Dictionary<string, object> model = new Dictionary<string, object>{};
+        Course SelectedCourse = Course.Find(parameters.id);
+        var studentsInCourse = SelectedCourse.GetStudents();
+        var allStudents = Student.GetAll();
+        model.Add("course", SelectedCourse);
+        model.Add("students", studentsInCourse);
+        model.Add("allStudents", allStudents);
+        return View["course.cshtml", model];
+      };
+
+      Post["/courses/{id}/{number}"] = parameters => {
+        Student newStudent = Student.Find(Request.Form["all-students"]);
+        Course selectedCourse = Course.Find(parameters.id);
+        selectedCourse.AddStudent(newStudent);
+        Dictionary<string, object> model = new Dictionary<string, object>{};
+        var studentsInCourse = selectedCourse.GetStudents();
+        var allStudents = Student.GetAll();
+        model.Add("course", selectedCourse);
+        model.Add("students", studentsInCourse);
+        model.Add("allStudents", allStudents);
+        return View["course.cshtml", model];
+      };
+
+      Get["/students/{id}/{name}"] = parameters => {
+        Dictionary<string, object> model = new Dictionary<string, object>{};
+        Student SelectedStudent = Student.Find(parameters.id);
+        List<Course> studentCourses = SelectedStudent.GetCourses();
+        var allCourses = Course.GetAll();
+        model.Add("student", SelectedStudent);
+        model.Add("courses", studentCourses);
+        model.Add("allCourses", allCourses);
+        return View["student.cshtml", model];
+      };
+
+      Post["/students/{id}/{name}"] = parameters => {
+        Course selectedCourse = Course.Find(Request.Form["all-courses"]);
+        Student SelectedStudent = Student.Find(parameters.id);
+        selectedCourse.AddStudent(SelectedStudent);
+        Dictionary<string, object> model = new Dictionary<string, object>{};
+        var studentCourses = SelectedStudent.GetCourses();
+        var allCourses = Course.GetAll();
+        model.Add("student", SelectedStudent);
+        model.Add("courses", studentCourses);
+        model.Add("allCourses", allCourses);
+        return View["student.cshtml", model];
+      };
+
     }
   }
 }

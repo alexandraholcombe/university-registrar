@@ -1,0 +1,19 @@
+<h1>@Model["course"].GetNumber() - @Model["course"].GetName()</h1>
+
+<ul>
+  @foreach (var student in @Model["students"])
+  {
+    <li><a href="/students/@student.GetId()">@student.GetName()</a></li>
+  }
+</ul>
+<form action="/courses/@Model["course"].GetId()/@Model["course"].GetNumber()" method="post">
+  <select name="all-students">
+    @foreach (var student in @Model["allStudents"])
+    {
+      <option value="@student.GetId()">@student.GetName()</option>
+    }
+  </select>
+  <button type="submit" name="button">Add to @Model["course"].GetNumber()</button>
+</form>
+<a href="/courses">All Courses</a>
+<a href="/">Home Page</a>
